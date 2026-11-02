@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><title>AYAH by INOMA — Rapport projet</title>
+<style>
+@page { size: A4; margin: 16mm 15mm 18mm; }
+:root { --ink:#1d1b18; --muted:#6b645a; --gold:#a97f3c; --line:#e3dccf; --soft:#f7f3ec; --green:#173a2c; }
+* { box-sizing:border-box; }
+body { margin:0; font-family:"Avenir Next",Avenir,"Helvetica Neue",Arial,sans-serif; color:var(--ink); font-size:10pt; line-height:1.45; }
+h1,h2,h3 { font-family:"Iowan Old Style","Palatino","Georgia",serif; font-weight:600; color:var(--green); }
+h1 { font-size:30pt; margin:0; letter-spacing:.5px; }
+h2 { font-size:16pt; margin:0 0 8px; padding-bottom:5px; border-bottom:1.5px solid var(--gold); break-after:avoid; }
+h3 { font-size:11.5pt; margin:14px 0 5px; break-after:avoid; }
+p { margin:0 0 7px; }
+section { break-before:page; }
+section.nobreak { break-before:auto; margin-top:16px; }
+table { width:100%; border-collapse:collapse; margin:6px 0 10px; font-size:8.8pt; break-inside:auto; }
+th { text-align:left; background:var(--green); color:#fff; font-weight:600; padding:5px 6px; }
+td { padding:4px 6px; border-bottom:1px solid var(--line); vertical-align:top; }
+tr { break-inside:avoid; }
+tr:nth-child(even) td { background:#fbf9f5; }
+td.num, th.num { text-align:right; white-space:nowrap; }
+.tot td { font-weight:700; background:var(--soft) !important; border-top:1.5px solid var(--gold); }
+.note { background:var(--soft); border-left:3px solid var(--gold); padding:7px 10px; margin:8px 0; font-size:9pt; break-inside:avoid; }
+.warn { background:#fdf1ee; border-left:3px solid #b5523b; padding:7px 10px; margin:8px 0; font-size:9pt; break-inside:avoid; }
+.muted { color:var(--muted); }
+.grid2 { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+img { width:100%; border-radius:6px; display:block; }
+figure { margin:0 0 8px; break-inside:avoid; }
+figcaption { font-size:8pt; color:var(--muted); margin-top:3px; }
+code { font-family:"SF Mono",Menlo,monospace; font-size:8.3pt; background:var(--soft); padding:0 3px; border-radius:3px; }
+ul, ol { margin:0 0 8px; padding-left:18px; } li { margin-bottom:2px; }
+/* couverture */
+.cover { height:262mm; display:flex; flex-direction:column; justify-content:space-between; }
+.cover .brand { font-size:9pt; letter-spacing:4px; color:var(--gold); text-transform:uppercase; }
+.cover .sub { font-family:"Iowan Old Style",Georgia,serif; font-size:13pt; color:var(--muted); margin-top:6px; }
+.cover .ar { font-family:"Diwan Thuluth","Geeza Pro",serif; font-size:30pt; color:var(--gold); direction:rtl; margin:4px 0 0; }
+.cover img { border-radius:10px; }
+.kpis { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; }
+.kpi { border:1px solid var(--line); border-radius:8px; padding:8px 10px; }
+.kpi b { display:block; font-size:15pt; color:var(--green); font-family:"Iowan Old Style",Georgia,serif; }
+.kpi span { font-size:8pt; color:var(--muted); }
+.meta { font-size:8.5pt; color:var(--muted); border-top:1px solid var(--line); padding-top:6px; display:flex; justify-content:space-between; }
+.block { border:1px solid var(--line); border-radius:6px; padding:6px 8px; text-align:center; font-size:8.5pt; background:#fff; }
+.block b { color:var(--green); }
+.diagram { display:grid; grid-template-columns:1fr 1.1fr 1fr; gap:8px; align-items:center; margin:8px 0 12px; }
+.center { background:var(--green); color:#fff; border-radius:8px; padding:14px 8px; text-align:center; }
+.center b { color:#e9cf98; font-size:11pt; }
+.col { display:flex; flex-direction:column; gap:5px; }
+</style></head><body>
+
+<!-- ======================================================= COUVERTURE -->
+<div class="cover">
+  <div>
+    <div class="brand">INOMA · Rapport projet</div>
+    <h1>AYAH</h1>
+    <div class="ar">القرآن الكريم</div>
+    <div class="sub">Objet de décoration islamique qui récite le Coran — version « Radio »</div>
+  </div>
+  <img src="../radio/apercus/rendu_vert.png" alt="Rendu AYAH Radio">
+  <div class="kpis">
+    <div class="kpi"><b>170 × 78 × 150</b><span>mm, socle compris</span></div>
+    <div class="kpi"><b>≈ 15–25 €</b><span>électronique / appareil (estim.)</span></div>
+    <div class="kpi"><b>13</b><span>pièces imprimées (P2S)</span></div>
+    <div class="kpi"><b>8</b><span>composants électroniques à acheter</span></div>
+  </div>
+  <div class="meta"><span>État au 2 novembre 2026 · prototype en cours</span><span>github.com/HARRMOS/ummati-deco</span></div>
+</div>
+
+<!-- ======================================================= 1. SYNTHÈSE -->
+<section>
+<h2>1. Synthèse</h2>
+<p><b>AYAH</b> est d'abord un bel objet de décoration, puis un lecteur du Coran : les 114 sourates sont stockées sur carte microSD (lecture hors ligne), avec plusieurs récitateurs, un éclairage blanc chaud, des commandes physiques et, plus tard, un pilotage depuis l'application <b>Ummati</b>.</p>
+<p>Après deux explorations (arche ajourée, puis niche en goutte), le projet est parti sur une forme <b>« radio » en arche</b>, inspirée de l'image de référence : plus simple à imprimer, plus lisible, et qui intègre naturellement la grille du haut-parleur.</p>
+
+<h3>Ce qui est fait</h3>
+<ul>
+  <li><b>Design</b> : modèle 3D paramétrique de la version Radio, rendus réalistes, 3 coloris possibles.</li>
+  <li><b>Mécanique</b> : 12 fichiers STL/STEP (13 pièces imprimées), validés géométriquement, avec visserie et ordre d'impression.</li>
+  <li><b>Calligraphie</b> : « القرآن الكريم » vectorisée en relief, imprimable en une passe (noir puis or).</li>
+  <li><b>Firmware</b> : projet PlatformIO pour ESP32-S3 (test n°1 : LED, ruban, boutons, potentiomètre), compilé avec succès.</li>
+  <li><b>Code et fichiers</b> : tout est versionné sur GitHub.</li>
+</ul>
+<h3>Ce qui reste à faire</h3>
+<ul>
+  <li>Acheter les composants manquants, <b>mesurer leurs cotes réelles</b> et ajuster les pièces qui en dépendent.</li>
+  <li>Imprimer et valider les emboîtements (aucune pièce n'a encore été imprimée).</li>
+  <li>Firmware audio (lecture SD, I2S), encodeur, touches tactiles, Wi-Fi et application.</li>
+  <li><b>Droits des récitations</b> et licence de la police calligraphique avant toute vente.</li>
+</ul>
+<div class="note"><b>Convention :</b> tous les prix de ce rapport sont des <b>estimations</b> (fourchettes AliExpress / Amazon habituelles), non vérifiées à la date du rapport. Les cotes des composants non encore reçus sont des valeurs typiques à confirmer.</div>
+
+<h3>Historique du design</h3>
+<div class="grid2">
+  <figure><img src="../design/renders/v1/ayah_ivory_hero.png"><figcaption>v1 — arche ajourée (abandonnée)</figcaption></figure>
+  <figure><img src="../design/renders/v3_ivory_hero.png"><figcaption>v3 — niche en goutte (abandonnée : trop complexe)</figcaption></figure>
+</div>
+</section>
+
+<!-- ======================================================= 2. DESIGN -->
+<section>
+<h2>2. Design retenu : AYAH « Radio »</h2>
+<div class="grid2">
+  <figure><img src="../radio/apercus/face_vert.png"><figcaption>Vue de face</figcaption></figure>
+  <figure><img src="../radio/apercus/eclate.png"><figcaption>Vue éclatée : dos, corps, baffle, grille, plaque, touches, molette</figcaption></figure>
+</div>
+<h3>Éléments</h3>
+<ul>
+  <li><b>Corps en arche</b> monobloc (vert, noir ou ivoire), imprimé face avant sur le plateau, <b>sans supports</b>.</li>
+  <li><b>Grille dorée</b> en treillis géométrique : décor <b>et</b> grille acoustique, rétroéclairée par des LED blanc chaud.</li>
+  <li><b>Cartouche en mihrab</b> : plaque sombre avec coupole, minarets et calligraphie « القرآن الكريم » en relief doré.</li>
+  <li><b>2 haut-parleurs Ø40</b> de part et d'autre du cartouche (son plus ample, symétrique).</li>
+  <li><b>3 touches dorées tactiles</b> (précédent, lecture/pause, suivant) : aucune mécanique fragile.</li>
+  <li><b>Molette dorée</b> (encodeur) : volume et navigation entre sourates, avec un arc gravé autour.</li>
+  <li><b>Socle doré</b>, <b>dos démontable</b> (4 vis) portant toute l'électronique.</li>
+</ul>
+<h3>Améliorations par rapport à l'image de référence</h3>
+<table>
+<tr><th>Image de référence</th><th>Version AYAH</th><th>Pourquoi</th></tr>
+<tr><td>Boutons mécaniques</td><td>Touches dorées tactiles (ruban cuivre)</td><td>Pas de pièce mobile, plus fiable, coût quasi nul</td></tr>
+<tr><td>1 haut-parleur implicite</td><td>2 × Ø40 sur un seul ampli</td><td>Son plus large, grille utilisée des deux côtés</td></tr>
+<tr><td>Lueur décorative</td><td>LED adressables blanc chaud derrière la grille</td><td>Ambiance, mode nuit, animation douce</td></tr>
+<tr><td>Assemblage inconnu</td><td>Dos démontable, inserts laiton, aucune colle sur l'électronique</td><td>Réparable, prototypable, industrialisable</td></tr>
+</table>
+<h3>Variantes de couleur</h3>
+<p>Vert profond &amp; or (référence) · Noir mat &amp; or · Ivoire &amp; or. Le corps est la seule pièce qui change ; toutes les pièces « OR » sont communes.</p>
+</section>
+
+<!-- ======================================================= 3. ÉLECTRONIQUE -->
+<section>
+<h2>3. Architecture électronique</h2>
+<div class="diagram">
+  <div class="col">
+    <div class="block"><b>USB-C 5 V / 3 A</b><br>prise sur le dos</div>
+    <div class="block"><b>microSD</b><br>114 sourates × récitateurs</div>
+    <div class="block"><b>Encodeur EC11</b><br>volume · navigation · appui</div>
+    <div class="block"><b>3 touches tactiles</b><br>◀ ⏯ ▶</div>
+  </div>
+  <div class="center"><b>ESP32-S3 N16R8</b><br>Wi-Fi · BLE · 8 Mo PSRAM<br><span style="font-size:8pt;opacity:.8">lecture MP3, LED, commandes, OTA</span></div>
+  <div class="col">
+    <div class="block"><b>MAX98357A</b><br>ampli I2S 3 W</div>
+    <div class="block"><b>2 × HP Ø40 8 Ω</b><br>en parallèle (= 4 Ω)</div>
+    <div class="block"><b>Ruban LED adressable</b><br>blanc chaud derrière la grille</div>
+    <div class="block"><b>Application Ummati</b><br>(Wi-Fi, plus tard)</div>
+  </div>
+</div>
+
+<h3>Brochage ESP32-S3</h3>
+<table>
+<tr><th>Fonction</th><th>GPIO</th><th>Remarque</th></tr>
+<tr><td>Ruban LED (données)</td><td>5</td><td>via résistance 220–470 Ω</td></tr>
+<tr><td>Touches tactiles ◀ / ⏯ / ▶</td><td>6 / 7 / 8</td><td>broches tactiles natives du S3</td></tr>
+<tr><td>Ampli I2S : BCLK / LRC / DIN</td><td>15 / 16 / 17</td><td></td></tr>
+<tr><td>microSD (SPI) : SCK / MOSI / MISO / CS</td><td>12 / 11 / 13 / 10</td><td></td></tr>
+<tr><td>Encodeur : A / B / bouton</td><td>39 / 40 / 41</td><td></td></tr>
+<tr><td>LED de test (prototype)</td><td>4</td><td>firmware n°1</td></tr>
+<tr><td><b>À ne jamais utiliser</b></td><td>35-37, 19-20, 0/3/45/46, 26-32</td><td>PSRAM, USB, démarrage, flash</td></tr>
+</table>
+
+<h3>Consommation (estimation)</h3>
+<p>ESP32 en Wi-Fi : pics ≈ 0,3 A · ampli à fort volume : ≈ 0,6–0,8 A · LED (10 à intensité limitée) : ≈ 0,2 A. <b>Pic total ≈ 1,2–1,5 A sous 5 V</b> → alimentation USB-C 5 V / 3 A recommandée. Dissipation inférieure à 3 W : aucun refroidissement nécessaire.</p>
+</section>
+
+<!-- ======================================================= 4. BOM -->
+<section>
+<h2>4. Liste des composants et coûts</h2>
+<h3>Électronique (12 références, ≈ 25 pièces)</h3>
+<table>
+<tr><th>#</th><th>Composant</th><th class="num">Qté</th><th class="num">Prix estimé</th><th>Statut</th></tr>
+<tr><td>1</td><td>ESP32-S3 DevKitC N16R8</td><td class="num">1</td><td class="num">6–9 €</td><td>✅ possédé</td></tr>
+<tr><td>2</td><td>Ampli I2S MAX98357A</td><td class="num">1</td><td class="num">1,5–3 €</td><td>à acheter</td></tr>
+<tr><td>3</td><td>Haut-parleur Ø40 mm 8 Ω 2–3 W</td><td class="num">2</td><td class="num">2–4 €</td><td>à acheter</td></tr>
+<tr><td>4</td><td>Module microSD (SPI)</td><td class="num">1</td><td class="num">0,5–1,5 €</td><td>à acheter</td></tr>
+<tr><td>5</td><td>Carte microSD 16 Go (SanDisk / Samsung)</td><td class="num">1</td><td class="num">5–8 €</td><td>à acheter</td></tr>
+<tr><td>6</td><td>Encodeur EC11 avec bouton</td><td class="num">1</td><td class="num">0,5–1 €</td><td>à acheter</td></tr>
+<tr><td>7</td><td>Rallonge USB-C mâle → femelle à visser (data)</td><td class="num">1</td><td class="num">2–4 €</td><td>à acheter</td></tr>
+<tr><td>8</td><td>Ruban LED adressable (≈ 10 LED)</td><td class="num">1</td><td class="num">—</td><td>✅ possédé</td></tr>
+<tr><td>9</td><td>Résistance 220–470 Ω</td><td class="num">1</td><td class="num">—</td><td>✅ possédé</td></tr>
+<tr><td>10</td><td>Condensateur 1000 µF 16 V</td><td class="num">1</td><td class="num">0,2 €</td><td>à acheter</td></tr>
+<tr><td>11</td><td>Ruban cuivre adhésif (3 pastilles)</td><td class="num">1</td><td class="num">2–4 €</td><td>à acheter</td></tr>
+<tr><td>12</td><td>Fils silicone / Dupont</td><td class="num">—</td><td class="num">0–3 €</td><td>en partie</td></tr>
+<tr><td>+</td><td>Chargeur USB-C 5 V / 3 A</td><td class="num">1</td><td class="num">6–10 €</td><td>optionnel</td></tr>
+</table>
+<h3>Visserie et accessoires (≈ 32 pièces)</h3>
+<table>
+<tr><th>Article</th><th class="num">Qté</th><th>Usage</th><th class="num">Prix (lot)</th></tr>
+<tr><td>Inserts laiton M3 (Ø4 × 5,7)</td><td class="num">10</td><td>baffle 4, dos 4, socle 2</td><td class="num">6–10 €</td></tr>
+<tr><td>Vis M3 × 8 tête cylindrique</td><td class="num">6</td><td>baffle 4, socle 2</td><td class="num" rowspan="2">5–8 €</td></tr>
+<tr><td>Vis M3 × 8 tête fraisée</td><td class="num">4</td><td>dos</td></tr>
+<tr><td>Vis à plastique Ø2,2 × 8</td><td class="num">8</td><td>bagues HP 6, barrette 2</td><td class="num">2–3 €</td></tr>
+<tr><td>Patins silicone Ø10</td><td class="num">4</td><td>sous le socle</td><td class="num">2 €</td></tr>
+</table>
+<h3>Récapitulatif des coûts (estimations)</h3>
+<table>
+<tr><th>Poste</th><th class="num">Montant</th></tr>
+<tr><td>Électronique par appareil (hors chargeur)</td><td class="num">15–25 €</td></tr>
+<tr><td>Visserie par appareil</td><td class="num">≈ 1–2 €</td></tr>
+<tr><td>Filament (≈ 350–450 g de PLA)</td><td class="num">8–12 €</td></tr>
+<tr class="tot"><td>Coût matière par appareil</td><td class="num">≈ 25–35 €</td></tr>
+<tr><td>Achats du prototype (lots et kits compris)</td><td class="num">≈ 40–60 €</td></tr>
+</table>
+<p class="muted">Non inclus : temps d'impression et d'assemblage, emballage, certification (voir § 9).</p>
+</section>
+
+<!-- ======================================================= 5. PIÈCES -->
+<section>
+<h2>5. Pièces imprimables</h2>
+<p>Fichiers : <code>radio/stl/</code> (Bambu Studio) et <code>radio/step/</code> (Fusion / FreeCAD). Générés par <code>radio/ayah_radio.py</code> (CadQuery) : toute cote se modifie en tête de fichier, puis on régénère.</p>
+<table>
+<tr><th>#</th><th>Pièce</th><th>Filament</th><th>Orientation</th><th class="num">Dimensions (mm)</th></tr>
+<tr><td>01</td><td>Corps</td><td>vert / noir / ivoire</td><td>face avant sur le plateau</td><td class="num">170 × 72 × 144</td></tr>
+<tr><td>02</td><td>Grille</td><td>or</td><td>face avant sur le plateau</td><td class="num">144 × 85 × 4,5</td></tr>
+<tr><td>03</td><td>Plaque calligraphiée</td><td>noir + or (à 3,3 mm)</td><td>collerette en bas</td><td class="num">57 × 61 × 4,3</td></tr>
+<tr><td>04</td><td>Baffle (porte HP)</td><td>blanc</td><td>à plat</td><td class="num">166 × 87 × 15,5</td></tr>
+<tr><td>05</td><td>Bague HP (×2)</td><td>quelconque</td><td>à plat</td><td class="num">54 × 52 × 5,5</td></tr>
+<tr><td>06</td><td>Dos électronique</td><td>comme le corps</td><td>face extérieure en bas</td><td class="num">165 × 139 × 17</td></tr>
+<tr><td>07</td><td>Barrette ESP32</td><td>quelconque</td><td>à plat</td><td class="num">8 × 49 × 4,5</td></tr>
+<tr><td>08</td><td>Socle</td><td>or</td><td>à plat</td><td class="num">176 × 78 × 6</td></tr>
+<tr><td>09</td><td>Molette</td><td>or</td><td>dessus sur le plateau</td><td class="num">Ø30 × 16</td></tr>
+<tr><td>10–12</td><td>Touches ◀ ⏯ ▶</td><td>or</td><td>face gravée en haut</td><td class="num">Ø20 / Ø26 / Ø20</td></tr>
+</table>
+
+<h3>Ordre d'impression</h3>
+<table>
+<tr><th>Étape</th><th>Pièces</th><th>Condition</th></tr>
+<tr><td><b>1 — maintenant</b></td><td>08 socle · 02 grille · 03 plaque · 10–12 touches · 01 corps</td><td>Ne dépendent d'aucun composant</td></tr>
+<tr><td><b>2 — après réception</b></td><td>04 baffle · 05 bagues · 09 molette · 06 dos · 07 barrette</td><td>Mesurer HP, EC11, ESP32, ampli, module SD, prise USB-C</td></tr>
+</table>
+
+<h3>Réglages Bambu Studio (plateau : socle + grille + plaque)</h3>
+<table>
+<tr><th>Réglage</th><th>Valeur</th></tr>
+<tr><td>Orientation</td><td>« Poser sur une face » (F) : grille → face avant ; plaque → grande face arrière</td></tr>
+<tr><td>Filaments (AMS)</td><td>socle et grille : or · plaque : noir + <b>plage de hauteur 3,3 → 4,5 mm en or</b></td></tr>
+<tr><td>Préréglage</td><td>0,12 mm Fine · 3 parois · 5/4 couches dessus/dessous · 15 % gyroïde</td></tr>
+<tr><td>Supports / bordure</td><td>désactivés / aucune</td></tr>
+<tr><td>Pied d'éléphant</td><td>0,15 mm</td></tr>
+<tr><td>Plateau</td><td>PEI texturé (mat) ou lisse (brillant)</td></tr>
+<tr><td>Or « silk »</td><td>préréglage Bambu ; si besoin paroi extérieure à 60 mm/s</td></tr>
+</table>
+<div class="note">Pas encore de filament or : imprimer les pièces « OR » en blanc pour valider les emboîtements.</div>
+</section>
+
+<!-- ======================================================= 6. ASSEMBLAGE -->
+<section>
+<h2>6. Emplacements et assemblage</h2>
+<table>
+<tr><th>Composant</th><th>Emplacement</th><th>Fixation</th></tr>
+<tr><td>2 haut-parleurs Ø40</td><td>Baffle, de part et d'autre du cartouche</td><td>Bague + 3 vis à plastique chacun</td></tr>
+<tr><td>ESP32-S3</td><td>Dos, en bas au centre</td><td>4 plots, murets, barrette vissée</td></tr>
+<tr><td>MAX98357A</td><td>Dos, à gauche</td><td>Bac à murets (emboîtement serré)</td></tr>
+<tr><td>Module microSD</td><td>Dos, à droite</td><td>Bac à murets (accès : retirer le dos)</td></tr>
+<tr><td>Prise USB-C</td><td>Découpe dans le dos</td><td>2 vis de la prise</td></tr>
+<tr><td>Encodeur EC11</td><td>Façade, à droite</td><td>Écrou du canon (caché par la molette)</td></tr>
+<tr><td>Touches tactiles</td><td>Façade, bandeau</td><td>Emboîtées ; cuivre dans la coupelle</td></tr>
+<tr><td>Plaque calligraphiée</td><td>Derrière le cartouche</td><td>Plaquée par un rebord du baffle</td></tr>
+<tr><td>LED</td><td>Face avant du baffle</td><td>Adhésif du ruban (pas de support dédié)</td></tr>
+</table>
+<h3>Ordre d'assemblage</h3>
+<ol>
+  <li>Poser les inserts laiton au fer (≈ 230 °C, pointe dédiée), bien perpendiculaires.</li>
+  <li>Touches : coller le cuivre dans la coupelle, souder un fil, emboîter dans la façade.</li>
+  <li>Encodeur dans son trou, écrou serré à l'avant, molette emmanchée.</li>
+  <li>Grille posée <b>par l'intérieur</b>, plaque calligraphiée derrière le cartouche.</li>
+  <li>Baffle (HP et LED montés) vissé sur ses 4 colonnes : il plaque la grille et la plaque.</li>
+  <li>Socle vissé par l'intérieur (2 vis), puis dos avec l'électronique (4 vis).</li>
+</ol>
+</section>
+
+<!-- ======================================================= 7. FIRMWARE -->
+<section class="nobreak">
+<h2>7. Firmware</h2>
+<p>Projet <b>PlatformIO</b> (C++ / Arduino) dans <code>firmware/</code>. Le <b>test n°1</b> (LED intégrée, fondu PWM 20 kHz avec correction gamma, ruban adressable limité à 10 LED et 40 %, 3 boutons avec appui long, potentiomètre en volume) compile ; il reste à le tester sur la carte.</p>
+<table>
+<tr><th>Module</th><th>État</th></tr>
+<tr><td>LED / ambiance / mode nuit</td><td>prototype écrit</td></tr>
+<tr><td>Commandes (boutons → touches tactiles + encodeur)</td><td>à adapter</td></tr>
+<tr><td>Lecture MP3 depuis SD + I2S</td><td>à faire (à la réception de l'ampli)</td></tr>
+<tr><td>Navigation 114 sourates (annonce vocale, favoris)</td><td>à faire</td></tr>
+<tr><td>Wi-Fi, configuration, API locale, OTA signée</td><td>à faire</td></tr>
+<tr><td>Intégration Ummati</td><td>plus tard</td></tr>
+</table>
+</section>
+
+<!-- ======================================================= 8. RISQUES -->
+<section>
+<h2>8. Risques et précautions</h2>
+<table>
+<tr><th>Risque</th><th>Précaution</th></tr>
+<tr><td>Condensateur électrolytique inversé</td><td>Bande « − » au GND ; tension ≥ 16 V pour du 5 V</td></tr>
+<tr><td>5 V sur une broche de l'ESP32</td><td>Broches en 3,3 V uniquement ; potentiomètre sur 3V3</td></tr>
+<tr><td>LED ou ruban sans protection</td><td>Résistance sur chaque LED ; ruban jamais sur une broche ni sur 3V3</td></tr>
+<tr><td>Trop de courant sur l'USB</td><td>Limiter LED (nombre, intensité) ; une seule source d'alimentation à la fois</td></tr>
+<tr><td>Redémarrages à fort volume (brownout)</td><td>1000 µF + 100 nF au plus près de l'ampli</td></tr>
+<tr><td>Prototype sur breadboard</td><td>Ne jamais laisser allumé sans surveillance (mode nuit compris)</td></tr>
+<tr><td>PLA qui ramollit (55–60 °C)</td><td>Pas de soleil direct ni de voiture ; LED à puissance modérée</td></tr>
+<tr><td>Cotes non vérifiées</td><td>Mesurer chaque composant avant d'imprimer baffle, bagues, dos, molette</td></tr>
+</table>
+</section>
+
+<!-- ======================================================= 9. CONFORMITÉ & COMMERCE -->
+<section class="nobreak">
+<h2>9. Conformité et commercialisation</h2>
+<h3>Obligations UE / France (à confirmer avec un laboratoire)</h3>
+<ul>
+  <li><b>RED 2014/53/UE</b> (produit radio Wi-Fi/BLE) : sécurité, CEM, radio et, depuis août 2025, cybersécurité (EN 18031). Un module ESP32 pré-certifié aide, mais <b>n'exempte pas</b> le produit final.</li>
+  <li><b>RoHS</b>, <b>REACH</b>, <b>DEEE</b> (inscription éco-organisme, logo poubelle barrée), <b>Triman</b>, REP emballages.</li>
+  <li><b>GPSR</b> (sécurité générale des produits) : responsable dans l'UE, traçabilité. <b>Cyber Resilience Act</b> à anticiper.</li>
+  <li>Coût de certification : <b>plusieurs milliers d'euros</b> (ordre de grandeur), à amortir sur la série.</li>
+</ul>
+<h3>Droits</h3>
+<div class="warn"><b>Récitations :</b> les enregistrements appartiennent au récitateur ou au producteur. Toute distribution commerciale préchargée exige une <b>autorisation écrite</b>, y compris pour les sources utilisées par Ummati. <b>Calligraphie :</b> la police Diwan Thuluth (fournie avec macOS) convient au prototype ; vérifier sa licence ou passer à une police libre (Amiri, OFL) ou à une calligraphie commandée.</div>
+<h3>Marché</h3>
+<p>Des « Quran speakers » existent déjà (cubes et veilleuses LED, souvent 20–60 €, avec 114 sourates, télécommande, application). AYAH <b>n'est donc pas inédit fonctionnellement</b> : sa différence doit venir du <b>design objet d'art</b>, de récitations de qualité aux droits clairs, de l'intégration Ummati et de la personnalisation. Une fonction <b>adhan aux heures de prière</b> (calcul local) serait un fort argument. Positionnement envisageable : <b>89–149 €</b>, à confirmer quand le coût de revient réel sera connu.</p>
+</section>
+
+<!-- ======================================================= 10. PROCHAINES ÉTAPES -->
+<section class="nobreak">
+<h2>10. Prochaines étapes</h2>
+<ol>
+  <li>Imprimer socle, grille et plaque ; valider la finition or et la calligraphie.</li>
+  <li>Imprimer le corps ; tester l'emboîtement de la grille, de la plaque et des touches.</li>
+  <li>Commander les 8 composants manquants ; <b>mesurer</b> et ajuster les cotes du script.</li>
+  <li>Tester le firmware n°1 sur la carte, puis la lecture audio depuis la carte SD.</li>
+  <li>Imprimer baffle, bagues, dos et molette ; assemblage complet et test d'écoute.</li>
+  <li>Lancer les démarches droits (récitateurs, police) avant toute présérie.</li>
+</ol>
+<p class="muted">Dépôt : github.com/HARRMOS/ummati-deco — dossiers <code>radio/</code> (version actuelle), <code>firmware/</code>, <code>design/</code>, <code>cad/</code> (version niche).</p>
+</section>
+</body></html>
