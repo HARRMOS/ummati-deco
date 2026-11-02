@@ -12,6 +12,7 @@ avec lecteur de sourates hors ligne, écran de sélection et contrôle depuis l'
 | `design/screen_ui.html`, `design/panel_ui.html` | Maquette de l'interface de l'écran 1,9" (liste des sourates) |
 | `design/renders/` | Rendus |
 | `design/import/` | Analyse du modèle de référence généré par IA |
+| `cad/` | **Pièces imprimables** (STL/STEP), visserie et assemblage — voir [cad/README.md](cad/README.md) |
 | `firmware/` | Firmware ESP32-S3 (PlatformIO) |
 
 ## Matériel du prototype

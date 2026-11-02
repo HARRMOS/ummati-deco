@@ -3,3 +3,5 @@
 .pio/
 firmware/.pio/
 .vscode/
+.venv-cad/
+cad/step/01_niche_coque.step
